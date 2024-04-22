@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 module "alb_public_http" {
-  source = "../modules/alb_public_http"
+  source = "arul-ap/alb_public_http/aws"
   org = "abc"
   proj = "proj-x"
   env = "dev"
