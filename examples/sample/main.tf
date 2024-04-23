@@ -15,33 +15,33 @@ provider "aws" {
 
 module "alb_public_http" {
   source = "arul-ap/alb_public_http/aws"
-  org = "abc"
-  proj = "proj-x"
-  env = "dev"
-  
+  org    = "abc"
+  proj   = "proj-x"
+  env    = "dev"
+
   alb = {
-    name = "frond-end"
-    subnet_id = [module.vpc.public_subnet_id["web-subnet-01"],module.vpc.public_subnet_id["web-subnet-02"],module.vpc.public_subnet_id["web-subnet-03"]]
+    name              = "frond-end"
+    subnet_id         = [module.vpc.public_subnet_id["web-subnet-01"], module.vpc.public_subnet_id["web-subnet-02"], module.vpc.public_subnet_id["web-subnet-03"]]
     security_group_id = [module.vpc.sg_id["web-sg"]]
-    default_tg = "tg-01"
+    default_tg        = "tg-01"
   }
   target_groups = {
     tg-01 = {
-      vpc_id = module.vpc.vpc_id
-      protocol = "HTTP"
-      port = 80
+      vpc_id    = module.vpc.vpc_id
+      protocol  = "HTTP"
+      port      = 80
       target_id = [module.ec2.ec2_id["web-01"]]
     }
     tg-02 = {
-      vpc_id = module.vpc.vpc_id
-      protocol = "HTTP"
-      port = 80
+      vpc_id    = module.vpc.vpc_id
+      protocol  = "HTTP"
+      port      = 80
       target_id = [module.ec2.ec2_id["web-02"]]
     }
     tg-03 = {
-      vpc_id = module.vpc.vpc_id
+      vpc_id   = module.vpc.vpc_id
       protocol = "HTTP"
-      port = 80
+      port     = 80
     }
   }
   rules = {
@@ -51,10 +51,10 @@ module "alb_public_http" {
         host_header = ["example.com"]
       }
       action = {
-        action_type = "forward"
+        action_type  = "forward"
         target_group = "tg-01"
+      }
     }
-  }
     rule-02 = {
       priority = 101
       condition = {
@@ -63,8 +63,8 @@ module "alb_public_http" {
       action = {
         action_type = "redirect"
         redirect = {
-          port = 443
-          protocol = "HTTPS"
+          port        = 443
+          protocol    = "HTTPS"
           status_code = "HTTP_301"
         }
       }
@@ -75,9 +75,9 @@ module "alb_public_http" {
         host_header = ["example.org"]
       }
       action = {
-        action_type = "forward"
+        action_type  = "forward"
         target_group = "tg-03"
+      }
     }
-  }
   }
 }
