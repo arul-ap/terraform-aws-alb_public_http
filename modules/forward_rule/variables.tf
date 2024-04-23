@@ -1,20 +1,24 @@
 variable "condition" {
+  description = "Rule condition"
   type = object({
-    host_header = optional(list(string),[])
-    path_pattern = optional(list(string),[])
-    http_method = optional(list(string),[])
-    source_ip = optional(list(string),[])
+    host_header  = optional(list(string), [])
+    path_pattern = optional(list(string), [])
+    http_method  = optional(list(string), [])
+    source_ip    = optional(list(string), [])
   })
 }
 variable "target_group_arn" {
-  type = string
+  description = "Rule target"
+  type        = string
 }
 
 variable "alb_listener_arn" {
-  type = string
+  description = "LB listener ARN"
+  type        = string
 }
 
 variable "priority" {
-  type = number
+  description = "Rule priority"
+  type        = number
 }
 

@@ -1,14 +1,14 @@
 
-resource "aws_lb_listener_rule" "name" {
+resource "aws_lb_listener_rule" "public_alb" {
   listener_arn = var.alb_listener_arn
-  priority = var.priority
+  priority     = var.priority
   action {
     type = "redirect"
     redirect {
-      host = var.redirect.host
-      path = var.redirect.path
-      protocol = var.redirect.protocol
-      port = var.redirect.port
+      host        = var.redirect.host
+      path        = var.redirect.path
+      protocol    = var.redirect.protocol
+      port        = var.redirect.port
       status_code = var.redirect.status_code
     }
   }

@@ -1,8 +1,10 @@
 variable "tg_arn" {
-  type = string
+  description = "Target group"
+  type        = string
 }
 
 variable "targets" {
-  type = list(string)
+  description = "Targets to Attach"
+  type        = list(string)
 }
 

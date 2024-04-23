@@ -1,9 +1,9 @@
 
 resource "aws_lb_listener_rule" "public" {
   listener_arn = var.alb_listener_arn
-  priority = var.priority
+  priority     = var.priority
   action {
-    type = "forward"
+    type             = "forward"
     target_group_arn = var.target_group_arn
   }
   condition {

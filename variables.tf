@@ -11,6 +11,7 @@ variable "env" {
   type        = string
 }
 variable "alb" {
+  description = "ALB details"
   type = object({
     name              = string
     subnet_id         = list(string)
@@ -19,6 +20,7 @@ variable "alb" {
   })
 }
 variable "target_groups" {
+  description = "Target Groups"
   type = map(object({
     vpc_id    = string
     type      = optional(string, "instance")
@@ -28,6 +30,7 @@ variable "target_groups" {
   }))
 }
 variable "rules" {
+  description = "ALB rules"
   type = map(object({
     priority = number
     condition = object({
